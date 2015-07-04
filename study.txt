@@ -1,0 +1,32 @@
+Services - Run in UI thread
+extend Service
+startService(new Intent(this,MyService.class));
+Invokes onCreate and then onStartCommand
+stopService(intent)
+Invokes onDestroy
+
+Intent Service - Runs in separate thread
+startService(new Intent(this,MyService.class));
+Invokes onHandleIntent
+
+Service activity communication
+Define Broadcast receiver in activity. register in onResume
+private DataUpdateReceiver dataUpdateReceiver;
+if (dataUpdateReceiver == null) dataUpdateReceiver = new DataUpdateReceiver();
+IntentFilter intentFilter = new IntentFilter(RefreshTask.REFRESH_DATA_INTENT);
+registerReceiver(dataUpdateReceiver, intentFilter);
+
+onPause
+if (dataUpdateReceiver != null) unregisterReceiver(dataUpdateReceiver);
+
+In service,
+sendBroadcast(new Intent(RefreshTask.REFRESH_DATA_INTENT));
+
+InterFragment communication - 
+Callback Interface. F1 -> Activity - >F2
+
+Nested Fragment Communication -
+getParentFragment in child fragment 
+
+//Important
+WeakHashMap contains weak references for key i.e if key gets null, value will be removed from map. Cache is just the reverse.
