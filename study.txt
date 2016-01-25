@@ -4,10 +4,12 @@ startService(new Intent(this,MyService.class));
 Invokes onCreate and then onStartCommand
 stopService(intent)
 Invokes onDestroy
+Can call startService multiple times.Every time onStartCommand will be called but only one servcice will be there. stopSelf will stop it. 
 
 Intent Service - Runs in separate thread
 startService(new Intent(this,MyService.class));
 Invokes onHandleIntent
+Puts all requests in a queue like executor service with a single thread.
 
 Service activity communication
 Define Broadcast receiver in activity. register in onResume
